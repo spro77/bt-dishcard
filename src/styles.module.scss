@@ -1,0 +1,68 @@
+$bg-color: #363636;
+$bg-ui: #292929;
+
+
+* {
+  box-sizing: border-box;
+}
+.app {
+  display: flex;
+  justify-content: center;
+
+  .phoneFrame {
+    width: 375px;
+    height: 812px;
+    background-color: $bg-color;
+
+    .statusBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 44px;
+      padding: 0 1rem;
+      background: $bg-ui;
+      svg {
+        fill: white;
+      }
+    }
+
+    .catTabBar {
+      width: 100%;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      scrollbar-width: none; 
+    }
+  
+    .dishList {
+      width: 100%;
+      height: calc(100% - 20px - 108px - 44px);
+      padding: 8px;
+      overflow: auto;
+
+      .dish {
+        height: 170px;
+        padding: 8px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        background-color: lightgray;
+      }
+    }
+    
+    .footer {
+      width: 100%;
+      padding: 8px 0;
+      display: flex;
+      justify-content: center;
+      background: $bg-ui;
+
+      .marker {
+        width: 30%;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(255,255,255,.5);
+      }
+    };
+  }
+}
