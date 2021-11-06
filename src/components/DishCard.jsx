@@ -1,5 +1,5 @@
 import s from "../styles.module.scss";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useState } from "react";
 
