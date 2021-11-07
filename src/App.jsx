@@ -35,14 +35,14 @@ export default function App() {
     }
   }
 
-  const dishAnim = (cond) => {
+  const dishAnim = () => {
     return {
       hidden: {
         marginBottom: 28,
         scale: .75 },
       show: {
         marginBottom: 8,
-        height: cond ? 440 : null,
+        // height: cond ? 440 : null,
         scale: 1,
         transition: {
           // delay: 1,

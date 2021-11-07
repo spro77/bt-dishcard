@@ -4,7 +4,6 @@ import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
 
 export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
-  console.log(dish.id);
   const cardRef = useRef(null)
   const shouldExpand = cardIsOpen == dish.id
 
@@ -27,9 +26,9 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
   return (
     <motion.div
       ref={cardRef}
-      variants={variants(shouldExpand)}
+      variants={variants()}
       // initial="hidden"
-      // animate="show"
+      animate={{height: shouldExpand ? 440 : null}}
       data-id={dish.id}
       className={s.dishCard}
       onClick={(e) => cardTapHandler(e)}
