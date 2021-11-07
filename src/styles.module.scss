@@ -1,5 +1,6 @@
 $bg-color: #363636;
 $bg-ui: #292929;
+$accent: #17C23C;
 
 * {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -136,6 +137,25 @@ $bg-ui: #292929;
 
       svg {
         fill: black;
+      }
+
+      .addButton {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 2rem;
+        background: $accent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: calc(50% - 2rem);
+        top: -2rem;
+        border: none;
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.14), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 3px 5px rgba(0, 0, 0, 0.2);
+        // transform: translate(0, -50%);
+        svg {
+          fill: white;
+        }
       }
     }
 

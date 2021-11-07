@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useElementScroll, useVelocity } from "framer-motion";
 import axios from "axios";
 import s from "./styles.module.scss";
 import { StatusBar } from "./components/StatusBar";
@@ -29,7 +29,7 @@ export default function App() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
         // delayChildren: 1,
       }
     }
@@ -47,7 +47,7 @@ export default function App() {
       transition: {
         // delay: 1,
         type: "spring",
-        bounce: .3
+        bounce: .4
       }
     }
   }
@@ -75,7 +75,7 @@ export default function App() {
       <div className={s.phoneFrame}>
         <StatusBar />
         <CatTabBar />
-        <Cart cartAnim={cartAnim}/>
+        <Cart cartAnim={cartAnim} cardIsOpen={cardIsOpen}/>
         { dishes &&
           <motion.div
           variants={dishListAnim}
