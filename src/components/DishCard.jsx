@@ -26,8 +26,7 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
   return (
     <motion.div
       ref={cardRef}
-      variants={variants()}
-      // initial="hidden"
+      variants={variants}
       animate={{height: shouldExpand ? 440 : null}}
       data-id={dish.id}
       className={s.dishCard}

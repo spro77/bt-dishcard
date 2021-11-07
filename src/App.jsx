@@ -29,26 +29,25 @@ export default function App() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
         // delayChildren: 1,
       }
     }
   }
 
-  const dishAnim = () => {
-    return {
-      hidden: {
-        marginBottom: 28,
-        scale: .75 },
-      show: {
-        marginBottom: 8,
-        // height: cond ? 440 : null,
-        scale: 1,
-        transition: {
-          // delay: 1,
-          type: "spring",
-          bounce: .5
-        }
+  const dishAnim = {
+    hidden: {
+      marginBottom: 100,
+      scale: .85
+    },
+    show: {
+      marginBottom: 8,
+      // height: cond ? 440 : null,
+      scale: 1,
+      transition: {
+        // delay: 1,
+        type: "spring",
+        bounce: .3
       }
     }
   }
