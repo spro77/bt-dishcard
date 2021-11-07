@@ -11,6 +11,8 @@ $bg-ui: #292929;
   justify-content: center;
 
   .phoneFrame {
+    position: relative;
+    overflow: hidden;
     width: 375px;
     height: 812px;
     background-color: $bg-color;
@@ -112,6 +114,28 @@ $bg-ui: #292929;
             text-align: right;
           }
         }
+      }
+    }
+
+    .cart {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      z-index: 1;
+      height: 56px;
+      left: 8px;
+      right: 8px;
+      bottom: 28px;
+
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+       -webkit-backdrop-filter: blur(20px);
+      border-radius: 8px;
+
+      svg {
+        fill: black;
       }
     }
 

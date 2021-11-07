@@ -3,17 +3,11 @@ import { motion } from "framer-motion"
 import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
 
-export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf }) => {
+export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
+  console.log(dish.id);
   const cardRef = useRef(null)
   const shouldExpand = cardIsOpen == dish.id
-  /* useEffect(() => {
-    console.log(cardRef.current.offsetHeight);
-    if(cardRef && cardID == dish.id) cardRef.current.scrollIntoView({
-      block: 'center',
-      behavior: 'smooth'
-    })
-  }, [cardIsOpen])
- */
+
   const cardTapHandler = (e) => {
     const id = e.currentTarget.getAttribute("data-id")
     e.stopPropagation();
@@ -28,18 +22,14 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf }) => {
       left: 0,
       behavior: 'smooth'
     })
-
-    /* if(rf) rf.current.scrollTo({
-      top: cardOffset - offset,
-      left: 0,
-      behavior: 'smooth'
-    }) */
   };
 
   return (
     <motion.div
       ref={cardRef}
-      animate={shouldExpand ? { height: 440 } : null}
+      variants={variants(shouldExpand)}
+      // initial="hidden"
+      // animate="show"
       data-id={dish.id}
       className={s.dishCard}
       onClick={(e) => cardTapHandler(e)}
