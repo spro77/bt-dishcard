@@ -74,10 +74,11 @@ export default function App() {
     <div className={s.app}>
       <div className={s.phoneFrame}>
         <StatusBar />
-        <CatTabBar />
-        <Cart cartAnim={cartAnim} cardIsOpen={cardIsOpen}/>
+        <CatTabBar cardIsOpen={Boolean(cardIsOpen)}/>
+        <Cart cartAnim={cartAnim} cardIsOpen={Boolean(cardIsOpen)}/>
         { dishes &&
           <motion.div
+          layout
           variants={dishListAnim}
           initial="hidden"
           animate="show"

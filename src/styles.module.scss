@@ -23,6 +23,8 @@ html, body {
   }
 
   .phoneFrame {
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -43,7 +45,8 @@ html, body {
 
     .catTabBar {
       width: 100%;
-      overflow: scroll;
+      min-height: 108px;
+      overflow-x: scroll;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -52,8 +55,9 @@ html, body {
 
     .dishList {
       position: relative;
+      align-self: stretch;
       width: 100%;
-      height: calc(100% - 20px - 108px - 44px);
+      height: 100%;
       padding: 8px 8px 448px 8px;
       overflow-y: scroll;
 
