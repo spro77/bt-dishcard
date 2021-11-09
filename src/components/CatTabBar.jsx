@@ -6,7 +6,7 @@ export const CatTabBar = ({cardIsOpen}) => {
   return (
     <motion.div
     className={s.catTabBar}
-    animate={cardIsOpen ? {y: -200, display: 'none'} : null}
+    animate={cardIsOpen ? {height: 0, opacity: 0} : {height: 190, opacity: 1}}
     >
       <CatBar />
     </motion.div>
