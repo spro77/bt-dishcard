@@ -4,24 +4,26 @@ import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
 import cx from 'classnames';
 
-export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
+export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScrolling }) => {
   const cardRef = useRef(null)
   const shouldExpand = cardIsOpen == dish.id
   const catTabValue = parseInt(s.catTabValue)
   const cardHeightValue = parseInt(s.cardHeightValue)
 
-  const cardTapHandler = (e) => {
-    const id = e.currentTarget.getAttribute("data-id")
+  const cardTapHandler = (e, id) => {
     e.stopPropagation();
+    setScrolling(false);
+
     if (!cardIsOpen || cardIsOpen != dish.id) cardSetIsOpen(id)
     else cardSetIsOpen(null)
 
-    rf.current.scrollBy({
+    !cardIsOpen && rf.current.scrollBy({
       top: cardRef.current.getBoundingClientRect().top - cardHeightValue/2 - catTabValue,
       left: 0,
       behavior: 'smooth'
     })
   };
+
   return (
     <motion.div
       layout
@@ -33,9 +35,9 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
           duration: 1
         }
       }}
-      data-id={dish.id}
       className={s.dishCard}
-      onClick={(e) => cardTapHandler(e)}
+      onClick={(e) => cardTapHandler(e, dish.id)}
+      onAnimationComplete={()=>{setScrolling(true);}}
     >
       {/* <div className={s.fav}></div> */}
       <div className={s.tags}>

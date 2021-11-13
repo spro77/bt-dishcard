@@ -9,6 +9,7 @@ import { Cart } from "./components/Cart";
 export default function App() {
   const [dishes, setDishes] = useState();
   const [cardIsOpen, cardSetIsOpen] = useState(null);
+  const [isScrolling, setScrolling] = useState(true)
   const dishListRef = useRef(null)
 
   useEffect(() => {
@@ -25,6 +26,12 @@ export default function App() {
       transition: {
         staggerChildren: 0.15,
       }
+    }
+  }
+
+  const onScrollHandler = () => {
+    if (isScrolling && cardIsOpen) {
+      cardSetIsOpen(null)
     }
   }
 
@@ -67,6 +74,7 @@ export default function App() {
       <Cart cartAnim={cartAnim} cardIsOpen={Boolean(cardIsOpen)}/>
       { dishes &&
         <motion.div
+        onScroll={onScrollHandler}
         className={s.dishList}
         variants={dishListAnim}
         initial="hidden"
@@ -76,11 +84,13 @@ export default function App() {
           {dishes.map((dish, i) => (
             <DishCard
             rf={dishListRef}
+            setScrolling={setScrolling}
             key={dish.id}
             dish={dish}
             cardIsOpen={cardIsOpen}
             cardSetIsOpen={cardSetIsOpen}
             variants={dishAnim}
+            onAnimationComplete={()=>setScrolling(true)}
             />
           ))
       }

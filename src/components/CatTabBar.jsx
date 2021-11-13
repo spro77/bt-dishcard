@@ -6,6 +6,7 @@ export const CatTabBar = ({cardIsOpen}) => {
     <motion.div
     className={s.catTabBar}
     animate={cardIsOpen ? {height: 0} : null}
+    transition={{ duration: 1 }}
     >
       <CatBar />
     </motion.div>
