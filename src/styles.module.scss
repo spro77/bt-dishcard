@@ -51,17 +51,18 @@ html, body {
     overflow-y: scroll;
 
     .dishCard {
-      position: inherit;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      position: relative;
       height: $card-height;
       padding: 8px;
       margin-bottom: 8px;
       border-radius: 8px;
-      background: grey;
+      overflow: hidden;
 
       .tags {
+        position: absolute;
+        z-index: 1;
+        top: 8px;
+        left: 8px;
         display: flex;
         flex-direction: row;
         border-radius: 4px 0 0 0;
@@ -82,6 +83,11 @@ html, body {
       }
 
       .content {
+        position: absolute;
+        z-index: 1;
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
         display: grid;
         grid-template-columns: 24px 1fr 40px;
         column-gap: 8px;
@@ -119,6 +125,19 @@ html, body {
           text-align: right;
         }
       }
+
+      .gallery {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 100%;
+        background: gray;
+
+        .img {
+          height: 100%;
+        }
+      }
     }
   }
 
@@ -134,9 +153,9 @@ html, body {
     right: 8px;
     bottom: 0;
 
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     border-radius: 8px;
 
     svg {

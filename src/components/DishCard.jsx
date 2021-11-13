@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import s from "../styles.module.scss";
 import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
+import cx from 'classnames';
 
 export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
   const cardRef = useRef(null)
@@ -15,13 +16,8 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
     if (!cardIsOpen || cardIsOpen != dish.id) cardSetIsOpen(id)
     else cardSetIsOpen(null)
 
-
-    const diffExp = cardRef.current.getBoundingClientRect().top - cardHeightValue/2 - catTabValue
-    const diffCol = cardHeightValue - window.innerHeight/2 + catTabValue
-
-    console.log(shouldExpand, diffExp, ' / ', diffCol);
     rf.current.scrollBy({
-      top: shouldExpand ? diffCol : diffExp,
+      top: cardRef.current.getBoundingClientRect().top - cardHeightValue/2 - catTabValue,
       left: 0,
       behavior: 'smooth'
     })
@@ -31,7 +27,12 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
       layout
       ref={cardRef}
       variants={variants}
-      animate={{height: shouldExpand ? window.innerHeight - cardHeightValue: null}}
+      animate={{
+        height: shouldExpand ? window.innerHeight - cardHeightValue: null,
+        transition: {
+          duration: 1
+        }
+      }}
       data-id={dish.id}
       className={s.dishCard}
       onClick={(e) => cardTapHandler(e)}
@@ -51,8 +52,26 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
         </div>
         <div className={s.title}>{dish.title}</div>
         <div className={s.priceBlock}>{dish.price}</div>
-        <div className="picture" />
       </div>
+      <motion.div
+        animate={shouldExpand ? {
+          height: window.innerHeight/2 - 16
+        } : null}
+        transition={{duration: 1}}
+        className={s.gallery}
+      >
+        <motion.div
+          layout
+          className={s.img}
+          style={{
+            backgroundImage: `${shouldExpand ? `url(./${dish.id}.jpg), ` : ''}url(./thmbl-${dish.id}.jpg)`,
+            backgroundPosition: 'center, center',
+            backgroundRepeat: 'no-repeat, no-repeat',
+            backgroundSize: 'cover, cover',
+          }}
+        />
+        {/* <img src={shouldExpand ? `./${dish.id}.jpg` : `./thmbl-${dish.id}.jpg`} loading='lazy'/> */}
+      </motion.div>
     </motion.div>
   );
 };
