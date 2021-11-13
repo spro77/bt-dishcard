@@ -1,11 +1,13 @@
-import s from "../styles.module.scss";
 import { motion } from "framer-motion"
+import s from "../styles.module.scss";
 import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
 
 export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
   const cardRef = useRef(null)
   const shouldExpand = cardIsOpen == dish.id
+  const catTabValue = parseInt(s.catTabValue)
+  const cardHeightValue = parseInt(s.cardHeightValue)
 
   const cardTapHandler = (e) => {
     const id = e.currentTarget.getAttribute("data-id")
@@ -13,22 +15,23 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants }) => {
     if (!cardIsOpen || cardIsOpen != dish.id) cardSetIsOpen(id)
     else cardSetIsOpen(null)
 
-    const offsetExp = rf.current.offsetHeight/2 - (cardRef.current.offsetHeight - 270)/2
-    const offsetCol = rf.current.offsetHeight/2 - (cardRef.current.offsetHeight + 270)/2
 
-    rf.current.scrollTo({
-      top: cardRef.current.offsetTop - (shouldExpand ? offsetExp : offsetCol),
+    const diffExp = cardRef.current.getBoundingClientRect().top - cardHeightValue/2 - catTabValue
+    const diffCol = cardHeightValue - window.innerHeight/2 + catTabValue
+
+    console.log(shouldExpand, diffExp, ' / ', diffCol);
+    rf.current.scrollBy({
+      top: shouldExpand ? diffCol : diffExp,
       left: 0,
       behavior: 'smooth'
     })
   };
-
   return (
     <motion.div
       layout
       ref={cardRef}
       variants={variants}
-      animate={{height: shouldExpand ? 440 : null}}
+      animate={{height: shouldExpand ? window.innerHeight - cardHeightValue: null}}
       data-id={dish.id}
       className={s.dishCard}
       onClick={(e) => cardTapHandler(e)}

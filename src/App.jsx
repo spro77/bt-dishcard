@@ -2,11 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useElementScroll, useVelocity } from "framer-motion";
 import axios from "axios";
 import s from "./styles.module.scss";
-import { StatusBar } from "./components/StatusBar";
 import { CatTabBar } from "./components/CatTabBar";
 import { DishCard } from './components/DishCard'
 import { Cart } from "./components/Cart";
-import { Footer } from "./components/Footer";
 
 export default function App() {
   const [dishes, setDishes] = useState();
@@ -23,14 +21,9 @@ export default function App() {
   }, []);
 
   const dishListAnim = {
-    hidden: {
-      opacity: 0,
-    },
     show: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        // delayChildren: 1,
       }
     }
   }
@@ -42,10 +35,8 @@ export default function App() {
     },
     show: {
       marginBottom: 8,
-      // height: cond ? 440 : null,
       scale: 1,
       transition: {
-        // delay: 1,
         type: "spring",
         bounce: .4
       }
@@ -59,7 +50,7 @@ export default function App() {
       originY: 1
     },
     show: {
-      bottom: 28,
+      bottom: 8,
       rotateX: 0,
       originY: 1,
       transition: {
@@ -72,33 +63,28 @@ export default function App() {
 
   return (
     <div className={s.app}>
-      <div className={s.phoneFrame}>
-        <StatusBar />
-        <CatTabBar cardIsOpen={Boolean(cardIsOpen)}/>
-        <Cart cartAnim={cartAnim} cardIsOpen={Boolean(cardIsOpen)}/>
-        { dishes &&
-          <motion.div
-          layout
-          variants={dishListAnim}
-          initial="hidden"
-          animate="show"
-          ref={dishListRef}
-          className={s.dishList}
-          >
-            {dishes.map((dish, i) => (
-              <DishCard
-              rf={dishListRef}
-              key={dish.id}
-              dish={dish}
-              cardIsOpen={cardIsOpen}
-              cardSetIsOpen={cardSetIsOpen}
-              variants={dishAnim}
-              />
-            ))
-        }
-        </motion.div>}
-        <Footer />
-      </div>
+      <CatTabBar cardIsOpen={Boolean(cardIsOpen)}/>
+      <Cart cartAnim={cartAnim} cardIsOpen={Boolean(cardIsOpen)}/>
+      { dishes &&
+        <motion.div
+        className={s.dishList}
+        variants={dishListAnim}
+        initial="hidden"
+        animate="show"
+        ref={dishListRef}
+        >
+          {dishes.map((dish, i) => (
+            <DishCard
+            rf={dishListRef}
+            key={dish.id}
+            dish={dish}
+            cardIsOpen={cardIsOpen}
+            cardSetIsOpen={cardSetIsOpen}
+            variants={dishAnim}
+            />
+          ))
+      }
+      </motion.div>}
     </div>
   );
 }
