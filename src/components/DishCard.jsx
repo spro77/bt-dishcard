@@ -66,7 +66,7 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
           layout
           className={s.img}
           style={{
-            backgroundImage: `${shouldExpand ? `url(./${dish.id}.jpg), ` : ''}url(./thmbl-${dish.id}.jpg)`,
+            backgroundImage: `url(https://ik.imagekit.io/fuu3buevyij/bt/${dish.id}.webp${shouldExpand ? '' : `?tr=w-${window.innerWidth - 16}`})`,
             backgroundPosition: 'center, center',
             backgroundRepeat: 'no-repeat, no-repeat',
             backgroundSize: 'cover, cover',

@@ -147,13 +147,13 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    z-index: 1;
+    z-index: 10;
     height: 56px;
     left: 8px;
     right: 8px;
     bottom: 0;
 
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     border-radius: 8px;
