@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useElementScroll, useVelocity } from "framer-motion";
 import axios from "axios";
+import smoothscroll from 'smoothscroll-polyfill';
 import s from "./styles.module.scss";
 import { CatTabBar } from "./components/CatTabBar";
 import { DishCard } from './components/DishCard'
@@ -11,6 +12,8 @@ export default function App() {
   const [cardIsOpen, cardSetIsOpen] = useState(null);
   const [isScrolling, setScrolling] = useState(true)
   const dishListRef = useRef(null)
+
+  smoothscroll.polyfill();
 
   useEffect(() => {
     axios

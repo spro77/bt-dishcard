@@ -51,12 +51,14 @@ html, body {
     overflow-y: scroll;
 
     .dishCard {
+      color: black;
       position: relative;
       height: $card-height;
       padding: 8px;
       margin-bottom: 8px;
       border-radius: 8px;
       overflow: hidden;
+      background: white;
 
       .tags {
         position: absolute;
@@ -91,13 +93,17 @@ html, body {
         display: flex;
         flex-direction: column;
         z-index: 1;
-        top: calc(100% - 64px);
+        // top: calc(100% - 64px);
         bottom: 8px;
         left: 8px;
         right: 8px;
-        background: rgba(0,0,0,.5);
         padding: 8px;
         border-radius: 8px;
+        box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.15);
+
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
 
 
           .header {
@@ -108,14 +114,13 @@ html, body {
             .dishIcon {
               display: flex;
               align-items: center;
-              fill: rgba(255, 255, 255, 0.5);
+              fill: rgba(0, 0, 0, 0.5);
             }
 
             .title {
               font-weight: 500;
               font-size: 17px;
               line-height: 40px;
-              color: white;
             }
 
             .priceBlock {
@@ -125,15 +130,17 @@ html, body {
               font-weight: 500;
               font-size: 17px;
               line-height: 24px;
-              color: rgba(255, 255, 255, 0.5);
+              opacity: .75;
               width: 100%;
               text-align: right;
             }
           }
 
           .content {
+            overflow-y: scroll;
+            height: 100%;
+            padding: 8px;
             flex-shrink: 1;
-            background: coral;
           }
         }
 
@@ -163,11 +170,11 @@ html, body {
     left: 8px;
     right: 8px;
     bottom: 0;
+    border-radius: 8px;
 
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    border-radius: 8px;
+    -webkit-backdrop-filter: blur(10px);
 
     svg {
       fill: black;
