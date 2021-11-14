@@ -23,10 +23,8 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       behavior: 'smooth'
     })
   };
-
   return (
     <motion.div
-      layout
       ref={cardRef}
       variants={variants}
       animate={{
@@ -65,7 +63,9 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
           className={s.img}
           layout
           style={{
-            backgroundImage: `url(https://ik.imagekit.io/fuu3buevyij/bt/${dish.id}.webp${shouldExpand ? '' : `?tr=w-${window.innerWidth - 16}`})`,
+            backgroundImage: (shouldExpand ?
+              `url(https://ik.imagekit.io/fuu3buevyij/bt/${dish.id}.webp${`?tr=w-${window.innerWidth * 2}`}), `:'') +
+              `url(https://ik.imagekit.io/fuu3buevyij/bt/${dish.id}.webp${`?tr=w-${window.innerWidth - 16}`})`,
             backgroundPosition: 'center, center',
             backgroundRepeat: 'no-repeat, no-repeat',
             backgroundSize: 'cover, cover',
