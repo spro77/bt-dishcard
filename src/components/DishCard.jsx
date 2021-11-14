@@ -9,16 +9,21 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
   const shouldExpand = cardIsOpen == dish.id
   const catTabValue = parseInt(s.catTabValue)
   const cardHeightValue = parseInt(s.cardHeightValue)
+  const [top, setTop] = useState(cardHeightValue - 64)
 
-  const top = useMotionValue(cardHeightValue - 64)
+  const timing =.75
+  const galleryOpenHeight = window.innerWidth * 2/3
+  const contentTop = galleryOpenHeight * 2/3
 
-  useEffect(() => {
+  // const top = useMotionValue(cardHeightValue - 64)
+
+  /* useEffect(() => {
     if (shouldExpand) {
-      top.set(window.innerWidth * 2/3)
+      setTop(window.innerWidth * 2/3)
     } else {
-      top.set(cardHeightValue - 64)
+      setTop(cardHeightValue - 64)
     }
-  }, [shouldExpand])
+  }, [shouldExpand]) */
 
   const cardTapHandler = (e, id) => {
     e.stopPropagation();
@@ -33,6 +38,12 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       behavior: 'smooth'
     })
   };
+
+  const containerAnim = {
+    hidden: shouldExpand ? {top: null} : {top: contentTop},
+    show: shouldExpand ? {top: contentTop} : {top: cardHeightValue - 64}
+  }
+
   return (
     <motion.div
       ref={cardRef}
@@ -40,7 +51,7 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       animate={{
         height: shouldExpand ? window.innerHeight - cardHeightValue : cardHeightValue,
         transition: {
-          duration: 1
+          duration: timing
         }
       }}
       className={s.dishCard}
@@ -56,7 +67,12 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       </div>
       <motion.div
         className={s.contentContainer}
-        style={{ top }}
+        variants={containerAnim}
+        initial="hidden"
+        animate="show"
+        transition={{ duration: timing }}
+        // animate={{top: top}}
+        // style={{ top }}
       >
         <div className={s.header}>
           <div className={s.dishIcon}>
@@ -70,9 +86,9 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       <motion.div
         className={s.gallery}
         animate={shouldExpand ? {
-          height: window.innerWidth - 16
+          height: galleryOpenHeight
         } : null}
-        transition={{duration: 1}}
+        transition={{duration: timing}}
       >
         <motion.div
           className={s.img}
