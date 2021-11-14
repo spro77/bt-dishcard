@@ -14,18 +14,8 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
   const [top, setTop] = useState(cardHeightValue - 64)
 
   const timing =.75
-  const galleryOpenHeight = window.innerWidth * 2/3
+  const galleryOpenHeight = window.innerWidth * 1/1
   const contentTop = galleryOpenHeight * 2/3
-
-  // const top = useMotionValue(cardHeightValue - 64)
-
-  /* useEffect(() => {
-    if (shouldExpand) {
-      setTop(window.innerWidth * 2/3)
-    } else {
-      setTop(cardHeightValue - 64)
-    }
-  }, [shouldExpand]) */
 
   const cardTapHandler = (e, id) => {
     e.stopPropagation();
@@ -95,7 +85,7 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
           <div className={s.title}>{dish.title}</div>
           <div className={s.priceBlock}>{dish.price}</div>
         </div>
-        {!isAnimFinished && <div className={s.content}>
+        {!isAnimFinished && <div className={s.content} onClick={(e)=>{e.stopPropagation()}}>
           <Content />
         </div>}
       </motion.div>
