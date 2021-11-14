@@ -30,7 +30,7 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       ref={cardRef}
       variants={variants}
       animate={{
-        height: shouldExpand ? window.innerHeight - cardHeightValue: null,
+        height: shouldExpand ? window.innerHeight - cardHeightValue : cardHeightValue,
         transition: {
           duration: 1
         }
@@ -48,7 +48,6 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
         ))}
       </div>
       <div className={s.content}>
-        {/* <div className={s.badge}>{dish.qty}</div> */}
         <div className={s.dishIcon}>
           <IcoBakery />
         </div>
@@ -56,15 +55,15 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
         <div className={s.priceBlock}>{dish.price}</div>
       </div>
       <motion.div
+        className={s.gallery}
         animate={shouldExpand ? {
           height: window.innerHeight/2 - 16
         } : null}
         transition={{duration: 1}}
-        className={s.gallery}
       >
         <motion.div
-          layout
           className={s.img}
+          layout
           style={{
             backgroundImage: `url(https://ik.imagekit.io/fuu3buevyij/bt/${dish.id}.webp${shouldExpand ? '' : `?tr=w-${window.innerWidth - 16}`})`,
             backgroundPosition: 'center, center',
@@ -72,7 +71,6 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
             backgroundSize: 'cover, cover',
           }}
         />
-        {/* <img src={shouldExpand ? `./${dish.id}.jpg` : `./thmbl-${dish.id}.jpg`} loading='lazy'/> */}
       </motion.div>
     </motion.div>
   );
