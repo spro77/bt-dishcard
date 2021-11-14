@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { motion, useMotionValue } from "framer-motion"
 import s from "../styles.module.scss";
 import { ReactComponent as IcoBakery } from "../assets/ico-bakery.svg";
 import { useRef, useEffect, useState } from "react";
@@ -9,6 +9,16 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
   const shouldExpand = cardIsOpen == dish.id
   const catTabValue = parseInt(s.catTabValue)
   const cardHeightValue = parseInt(s.cardHeightValue)
+
+  const top = useMotionValue(cardHeightValue - 64)
+
+  useEffect(() => {
+    if (shouldExpand) {
+      top.set(window.innerWidth * 2/3)
+    } else {
+      top.set(cardHeightValue - 64)
+    }
+  }, [shouldExpand])
 
   const cardTapHandler = (e, id) => {
     e.stopPropagation();
@@ -37,7 +47,6 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
       onClick={(e) => cardTapHandler(e, dish.id)}
       onAnimationComplete={()=>{setScrolling(true);}}
     >
-      {/* <div className={s.fav}></div> */}
       <div className={s.tags}>
         {dish.tags.map((t, i) => (
           <div key={t + i} className={s.tag}>
@@ -45,17 +54,23 @@ export const DishCard = ({ dish, cardIsOpen, cardSetIsOpen, rf, variants, setScr
           </div>
         ))}
       </div>
-      <div className={s.content}>
-        <div className={s.dishIcon}>
-          <IcoBakery />
+      <motion.div
+        className={s.contentContainer}
+        style={{ top }}
+      >
+        <div className={s.header}>
+          <div className={s.dishIcon}>
+            <IcoBakery />
+          </div>
+          <div className={s.title}>{dish.title}</div>
+          <div className={s.priceBlock}>{dish.price}</div>
         </div>
-        <div className={s.title}>{dish.title}</div>
-        <div className={s.priceBlock}>{dish.price}</div>
-      </div>
+        <div className={s.content}></div>
+      </motion.div>
       <motion.div
         className={s.gallery}
         animate={shouldExpand ? {
-          height: window.innerHeight/2 - 16
+          height: window.innerWidth - 16
         } : null}
         transition={{duration: 1}}
       >

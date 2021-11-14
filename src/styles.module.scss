@@ -81,50 +81,60 @@ html, body {
           background: rgba(0,0,0,.5);
         }
       }
-
-      .content {
+      .badge, .fav {
+        display: none;
         position: absolute;
+      }
+
+      .contentContainer {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
         z-index: 1;
         bottom: 8px;
         left: 8px;
         right: 8px;
-        display: grid;
-        grid-template-columns: 24px 1fr 40px;
-        column-gap: 8px;
         background: rgba(0,0,0,.5);
         padding: 8px;
         border-radius: 8px;
 
-        .dishIcon {
-          display: flex;
-          align-items: center;
-          fill: rgba(255, 255, 255, 0.5);
-        }
 
-        .badge, .fav {
-          display: none;
-          position: absolute;
-        }
+          .header {
+            display: grid;
+            grid-template-columns: 24px 1fr 40px;
+            column-gap: 8px;
 
-        .title {
-          font-weight: 500;
-          font-size: 17px;
-          line-height: 40px;
-          color: white;
-        }
+            .dishIcon {
+              display: flex;
+              align-items: center;
+              fill: rgba(255, 255, 255, 0.5);
+            }
 
-        .priceBlock {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          font-weight: 500;
-          font-size: 17px;
-          line-height: 24px;
-          color: rgba(255, 255, 255, 0.5);
-          width: 100%;
-          text-align: right;
+            .title {
+              font-weight: 500;
+              font-size: 17px;
+              line-height: 40px;
+              color: white;
+            }
+
+            .priceBlock {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              font-weight: 500;
+              font-size: 17px;
+              line-height: 24px;
+              color: rgba(255, 255, 255, 0.5);
+              width: 100%;
+              text-align: right;
+            }
+          }
+
+          .content {
+            flex-shrink: 1;
+            background: coral;
+          }
         }
-      }
 
       .gallery {
         position: absolute;
